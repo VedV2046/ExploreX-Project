@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../styles/travel-spots.css';
 
-const BACKEND_URL = "https://b0a67942f4e8e96a-190-2-149-246.ngrok-free.app";
+const BACKEND_URL = "https://c74e4973b98481c5-190-2-149-246.serveousercontent.com";
 
 function TravelSpots({ city }) {
   const [spots, setSpots] = useState([]);
