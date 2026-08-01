@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
+import { getTravelSpots } from "../../services/api";
 import '../../styles/travel-spots.css';
 
-const BACKEND_URL = "https://c74e4973b98481c5-190-2-149-246.serveousercontent.com";
 
 function TravelSpots({ city }) {
   const [spots, setSpots] = useState([]);
@@ -9,37 +9,27 @@ function TravelSpots({ city }) {
   const [error, setError] = useState(null);
   const [isFallback, setIsFallback] = useState(false);
 
-  const fetchTravelSpots = (selectedCity) => {
+  const fetchTravelSpots = async (selectedCity) => {
     setLoading(true);
     setError(null);
-    setIsFallback(false);
 
-    const targetCity = selectedCity || 'Mumbai';
-    const apiEndpoint = `${BACKEND_URL}/api/travel?city=${encodeURIComponent(targetCity)}`;
+    try {
+        const data = await getTravelSpots(selectedCity || "");
+        console.log("Received Data:", data);
 
-    fetch(apiEndpoint)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`Server returned HTTP ${response.status}`);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Live travel spots data:", data.spots);
         if (Array.isArray(data.spots)) {
-          setSpots(data.spots);
+            setSpots(data.spots);
         } else if (Array.isArray(data)) {
-          setSpots(data);
+            setSpots(data);
         } else {
-          setSpots([]);
+            setSpots([]);
         }
+
+    } catch (err) {
+        setError(err.message);
+    } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching live data from backend:", err);
-        setError(`Unable to connect to live backend tunnel (${err.message}).`);
-        setLoading(false);
-      });
+    }
   };
 
   useEffect(() => {

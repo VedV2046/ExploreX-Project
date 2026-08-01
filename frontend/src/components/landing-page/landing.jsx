@@ -1,24 +1,18 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Header from './header.jsx';
 import Search from './search.jsx';
 import Hero from './hero-section.jsx';
 import MyMap from './map.jsx';
-import TravelSpots from './travel-spots.jsx';
 
-function Landing() {
-  const [searchCity, setSearchCity] = useState('Mumbai');
-
-  const handleSearch = (city) => {
-    setSearchCity(city);
-  };
+function Landing({ onSearch, onHome, onDiscover }) {
+  const searchCity = '';
 
   return (
     <div>
-      <Header />
-      <Search onSearch={handleSearch} currentCity={searchCity} />
-      <Hero />
-      <MyMap />
-      <TravelSpots city={searchCity} />
+      <Header onHome={onHome} onDiscover={onDiscover} />
+      <Search onSearch={onSearch} currentCity={searchCity} />
+      <Hero city={searchCity} />
+      {/* <MyMap /> */}
     </div>
   );
 }

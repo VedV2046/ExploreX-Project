@@ -4,6 +4,10 @@ import '../../styles/search.css';
 function Search({ onSearch, currentCity }) {
   const [inputVal, setInputVal] = useState(currentCity || '');
 
+  React.useEffect(() => {
+    setInputVal(currentCity || '');
+  }, [currentCity]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (inputVal.trim() && onSearch) {
@@ -18,7 +22,7 @@ function Search({ onSearch, currentCity }) {
           <input 
             className="search-input" 
             type="search" 
-            placeholder="Search destination (e.g. Mumbai, Delhi, Goa)..." 
+              placeholder="Search destination (e.g. Delhi, Goa, Jaipur)..." 
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
           />

@@ -1,7 +1,7 @@
 import React from "react";
 import logo from "../../assests/explorex_logo.png";
 
-function Header() {
+function Header({ onHome, onDiscover }) {
     return(
         <div className="header">
             <div className="brand">
@@ -9,9 +9,9 @@ function Header() {
                 <h1>ExploreX</h1>
             </div>
             <div className="links">
-                <h3>Home</h3>
-                <h3>Discover</h3>
-                <h3>Favourites</h3>
+                <button type="button" className="link-button" onClick={onHome}>Home</button>
+                <button type="button" className="link-button" onClick={onDiscover}>Discover</button>
+                <button type="button" className="link-button" onClick={onHome}>Favourites</button>
             </div>
         </div>
     );

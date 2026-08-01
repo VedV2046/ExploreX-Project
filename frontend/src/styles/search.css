@@ -1,5 +1,6 @@
 .search{
-    height: 300px;
+    height: auto;
+    margin-bottom: 100px;
     color: #E9DDFF;
     display: flex;
     flex-direction: column;
@@ -51,4 +52,4 @@
 
 .search-button:hover {
     background-color: #7C3AED;
-}
+}
