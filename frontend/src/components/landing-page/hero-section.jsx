@@ -11,8 +11,7 @@ const defaultCategories = [
     { id: 6, title: 'Parks', subcategories: ['Public Park', 'Playground', 'Nature Reserve'] },
 ];
 
-function Hero({ city: cityProp = '' }) {
-    const [selectedCategory, setSelectedCategory] = useState('');
+function Hero({ city: cityProp = '', selectedCategory = '', onCategoryChange }) {
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
     const [categories, setCategories] = useState(defaultCategories);
     const [loading, setLoading] = useState(false);
@@ -26,7 +25,7 @@ function Hero({ city: cityProp = '' }) {
         const fetchCategories = async () => {
         if (!city.trim()) {
             setCategories(defaultCategories);
-            setSelectedCategory('');
+            onCategoryChange?.('');
             setSelectedSubcategory('');
             setError('');
             return;
@@ -51,7 +50,7 @@ function Hero({ city: cityProp = '' }) {
                 : defaultCategories;
 
             setCategories(nextCategories);
-            setSelectedCategory('');
+            onCategoryChange?.('');
             setSelectedSubcategory('');
         } catch {
             setCategories(defaultCategories);
@@ -63,7 +62,7 @@ function Hero({ city: cityProp = '' }) {
 
         const timer = setTimeout(fetchCategories, 250);
         return () => clearTimeout(timer);
-    }, [city, API_BASE_URL]);
+    }, [city, API_BASE_URL, onCategoryChange]);
 
     const selectedCategoryData = useMemo(
         () => categories.find((item) => item.title === selectedCategory),
@@ -71,6 +70,12 @@ function Hero({ city: cityProp = '' }) {
     );
 
     const subcategoryOptions = selectedCategoryData?.subcategories || [];
+
+    useEffect(() => {
+        if (!selectedCategory) {
+            setSelectedSubcategory('');
+        }
+    }, [selectedCategory]);
 
     return (
         <div className="hero-section">
@@ -92,7 +97,7 @@ function Hero({ city: cityProp = '' }) {
                     id="category"
                     value={selectedCategory}
                     onChange={(e) => {
-                    setSelectedCategory(e.target.value);
+                    onCategoryChange?.(e.target.value);
                     setSelectedSubcategory('');
                     }}
                     disabled={loading}

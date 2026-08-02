@@ -1,16 +1,24 @@
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
-export async function getTravelSpots(city) {
-    console.log("Backend URL:", BACKEND_URL);
-    const response = await fetch(
-        `${BACKEND_URL}/api/travel?city=${encodeURIComponent(city)}`
-    );
+export async function getPlaces(city, category) {
+    const placesUrl = `${BACKEND_URL}/api/places?city=${encodeURIComponent(city)}&category=${encodeURIComponent(category)}`;
 
-    console.log("Response:", response);
-    
-    if (!response.ok) {
-        throw new Error(`Server Error ${response.status}`);
+    try {
+        const response = await fetch(placesUrl);
+
+        if (!response.ok) {
+            throw new Error(`Server Error ${response.status}`);
+        }
+
+        return await response.json();
+    } catch (error) {
+        const fallbackUrl = `${BACKEND_URL}/api/travel?city=${encodeURIComponent(city)}`;
+        const fallbackResponse = await fetch(fallbackUrl);
+
+        if (!fallbackResponse.ok) {
+            throw error;
+        }
+
+        return await fallbackResponse.json();
     }
-
-    return await response.json();
 }

@@ -4,14 +4,14 @@ import Search from './search.jsx';
 import Hero from './hero-section.jsx';
 import MyMap from './map.jsx';
 
-function Landing({ onSearch, onHome, onDiscover }) {
+function Landing({ onSearch, onHome, onDiscover, selectedCategory, onCategoryChange }) {
   const searchCity = '';
 
   return (
     <div>
       <Header onHome={onHome} onDiscover={onDiscover} />
       <Search onSearch={onSearch} currentCity={searchCity} />
-      <Hero city={searchCity} />
+      <Hero city={searchCity} selectedCategory={selectedCategory} onCategoryChange={onCategoryChange} />
       {/* <MyMap /> */}
     </div>
   );

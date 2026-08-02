@@ -1,13 +1,12 @@
 import React from 'react';
 import Header from '../landing-page/header.jsx';
-import Search from '../landing-page/search.jsx';
-import TravelSpots from '../landing-page/travelSpots.jsx';
+import Places from '../landing-page/Places.jsx';
 
-function Discover({ city, onSearch, onHome, onDiscover }) {
+function Discover({ city, category, onHome, onDiscover }) {
     return (
         <div>
             <Header onHome={onHome} onDiscover={onDiscover} />
-            <TravelSpots city={city} />
+            <Places city={city} category={category} />
         </div>
     );
 }
