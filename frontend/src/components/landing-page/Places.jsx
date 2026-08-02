@@ -2,39 +2,53 @@ import React, { useEffect, useState } from 'react';
 import { getPlaces } from '../../services/api';
 import '../../styles/travel-spots.css';
 
-function Places({ city, category }) {
-  const [places, setPlaces] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+const categoryLabelMap = {
+    'catering.restaurant': 'Restaurants',
+    'healthcare.hospital': 'Hospitals',
+    'catering.cafe': 'Cafes',
+    'healthcare.pharmacy': 'Medicals',
+    'public_transport.bus': 'Bus Stops',
+    'leisure.park': 'Parks',
+    'entertainment.cinema': "Cinemas",
+};
 
-  const fetchPlaces = async (selectedCity, selectedCategory) => {
+const getCategoryLabel = (category) => categoryLabelMap[category] || category || 'Places';
+
+function Places({ city, category }) {
+    const [places, setPlaces] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchPlaces = async (selectedCity, selectedCategory) => {
     setLoading(true);
     setError(null);
 
     try {
-      const data = await getPlaces(selectedCity || '', selectedCategory || '');
+        const data = await getPlaces(selectedCity || '', selectedCategory || '');
+        console.log("Backend Response:", data);
+        console.log("Places Array:", data.places);
 
-      if (Array.isArray(data.places)) {
-        setPlaces(data.places);
-      } else if (Array.isArray(data.spots)) {
-        setPlaces(data.spots);
-      } else if (Array.isArray(data)) {
-        setPlaces(data);
-      } else {
-        setPlaces([]);
-      }
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
+        if (Array.isArray(data.places)) {
+            setPlaces(data.places);
+        } else if (Array.isArray(data.spots)) {
+            setPlaces(data.spots);
+        } else if (Array.isArray(data)) {
+            setPlaces(data);
+        } else {
+            setPlaces([]);
+        }
+        } catch (err) {
+        setError(err.message);
+        } finally {
+        setLoading(false);
+        }
+    };
 
   useEffect(() => {
     fetchPlaces(city, category);
   }, [city, category]);
 
-  const headingCategory = category || 'Places';
+  const headingCategory = getCategoryLabel(category);
   const headingCity = city || 'Mumbai';
 
   return (

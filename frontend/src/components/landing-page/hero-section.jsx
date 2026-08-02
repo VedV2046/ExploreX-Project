@@ -3,13 +3,42 @@ import '../../styles/hero-section.css';
 
 // ...existing code...
 const defaultCategories = [
-    { id: 1, title: 'Restaurants', subcategories: ['Fast Food', 'Fine Dining', 'Local Cuisine'] },
-    { id: 2, title: 'Hospitals', subcategories: ['General Hospital', 'Clinic', 'Emergency Care'] },
-    { id: 3, title: 'Cafes', subcategories: ['Coffee Shop', 'Bakery', 'Dessert Cafe'] },
-    { id: 4, title: 'Medicals', subcategories: ['Pharmacy', 'Medical Store', 'Diagnostics'] },
-    { id: 5, title: 'Bus Stops', subcategories: ['Local Bus Stop', 'Intercity Stop', 'Transit Hub'] },
-    { id: 6, title: 'Parks', subcategories: ['Public Park', 'Playground', 'Nature Reserve'] },
+    { id: 1, title: 'Restaurants', value: 'catering.restaurant', subcategories: ['Fast Food', 'Fine Dining', 'Local Cuisine'] },
+    { id: 2, title: 'Hospitals', value: 'healthcare.hospital', subcategories: ['General Hospital', 'Clinic', 'Emergency Care'] },
+    { id: 3, title: 'Cafes', value: 'catering.cafe', subcategories: ['Coffee Shop', 'Bakery', 'Dessert Cafe'] },
+    { id: 4, title: 'Medicals', value: 'healthcare.pharmacy', subcategories: ['Pharmacy', 'Medical Store', 'Diagnostics'] },
+    { id: 5, title: 'Bus Stops', value: 'public_transport.bus', subcategories: ['Local Bus Stop', 'Intercity Stop', 'Transit Hub'] },
+    { id: 6, title: 'Parks', value: 'leisure.park', subcategories: ['Public Park', 'Playground', 'Nature Reserve'] },
+    { id: 7, title: 'Cinemas', value: 'entertainment.cinema', subcategories: ['Zoo', 'Safari Park', 'Animal Park'] },
 ];
+
+const categoryLabelMap = {
+    'catering.restaurant': 'Restaurants',
+    'healthcare.hospital': 'Hospitals',
+    'catering.cafe': 'Cafes',
+    'healthcare.pharmacy': 'Medicals',
+    'public_transport.bus': 'Bus Stops',
+    'leisure.park': 'Parks',
+    'entertainment.cinema': 'Cinemas',
+};
+
+const normalizeCategory = (category) => {
+    if (!category) {
+        return category;
+    }
+
+    if (category.value) {
+        return category;
+    }
+
+    const mappedValue = defaultCategories.find((item) => item.title === category.title)?.value;
+
+    return {
+        ...category,
+        value: mappedValue || category.value || category.title,
+        title: category.title || category.label || category.name,
+    };
+};
 
 function Hero({ city: cityProp = '', selectedCategory = '', onCategoryChange }) {
     const [selectedSubcategory, setSelectedSubcategory] = useState('');
@@ -25,7 +54,6 @@ function Hero({ city: cityProp = '', selectedCategory = '', onCategoryChange }) 
         const fetchCategories = async () => {
         if (!city.trim()) {
             setCategories(defaultCategories);
-            onCategoryChange?.('');
             setSelectedSubcategory('');
             setError('');
             return;
@@ -46,11 +74,10 @@ function Hero({ city: cityProp = '', selectedCategory = '', onCategoryChange }) 
             const data = await response.json();
             const nextCategories =
             Array.isArray(data?.categories) && data.categories.length
-                ? data.categories
+                ? data.categories.map(normalizeCategory)
                 : defaultCategories;
 
             setCategories(nextCategories);
-            onCategoryChange?.('');
             setSelectedSubcategory('');
         } catch {
             setCategories(defaultCategories);
@@ -62,15 +89,14 @@ function Hero({ city: cityProp = '', selectedCategory = '', onCategoryChange }) 
 
         const timer = setTimeout(fetchCategories, 250);
         return () => clearTimeout(timer);
-    }, [city, API_BASE_URL, onCategoryChange]);
+    }, [city, API_BASE_URL]);
 
     const selectedCategoryData = useMemo(
-        () => categories.find((item) => item.title === selectedCategory),
+        () => categories.find((item) => item.value === selectedCategory || item.title === selectedCategory),
         [categories, selectedCategory]
     );
 
     const subcategoryOptions = selectedCategoryData?.subcategories || [];
-
     useEffect(() => {
         if (!selectedCategory) {
             setSelectedSubcategory('');
@@ -105,7 +131,7 @@ function Hero({ city: cityProp = '', selectedCategory = '', onCategoryChange }) 
                 >
                     <option value="">Select category</option>
                     {categories.map((category) => (
-                    <option key={category.id || category.title} value={category.title}>
+                    <option key={category.id || category.value || category.title} value={category.value || category.title}>
                         {category.title}
                     </option>
                     ))}
