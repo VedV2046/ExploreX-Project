@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../assests/explorex_logo.png";
+import logo from "../../assests/explorex_logo2.png";
 
 function Header({ onHome, onDiscover }) {
     return(
