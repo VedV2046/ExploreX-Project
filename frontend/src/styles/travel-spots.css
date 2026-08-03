@@ -45,9 +45,10 @@
 
 .spot-card:hover, .spot-card:focus {
     transform: translateY(-6px) scale(1.12);
+    cursor: pointer;
     border: 1px solid rgba(139, 92, 246, 0.35);
     border-color: rgba(139, 92, 246, 0.35);
-    box-shadow: 100px 18px 40px -12px rgba(0,0,0,0.6), 100px 15px 240px rgba(139,92,246,0.08);
+    box-shadow: 100px 18px 40px 12px rgba(0, 0, 0, 0.411), 100px 15px 240px rgba(139,92,246,0.08);
 
     .spot-badge{
         border: 1px solid rgb(47, 0, 255);
@@ -120,7 +121,7 @@
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 25px;
+    height: 40px;
     gap: 8px;
     background: none;
     color: white;
@@ -136,7 +137,8 @@
 
 .maps-btn:hover, .maps-button:hover {
     transform: translateY(-2px); 
-    background-color: #A078FF;
+    background: linear-gradient(90deg, rgb(53, 30, 255) 0%, rgb(1, 18, 114) 100%);
+    border: 1px solid rgb(0, 16, 70);
 }
 
 .maps-icon { font-size: 16px; }

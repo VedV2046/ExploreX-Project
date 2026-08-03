@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Landing from './components/landing-page/landing'
 import Discover from './components/new-page/discover'
 import { CATEGORY_DATA } from './data/categories'
+import Footer from './components/landing-page/footer'
 
 function App() {
   const [page, setPage] = useState('landing')
@@ -70,6 +71,7 @@ function App() {
           onSubcategoryChange={handleSubcategoryChange}
         />
       )}
+      <Footer />
     </div>
   )
 }

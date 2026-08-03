@@ -91,11 +91,11 @@ export const CATEGORY_DATA = [
         label: 'Services',
         icon: '🛎️',
         items: [
-            { label: 'Police', value: 'services.police' },
-            { label: 'Fire Station', value: 'services.fire_station' },
-            { label: 'Taxi', value: 'services.taxi' },
-            { label: 'Finance', value: 'services.financial' },
-            { label: 'Travel Agency', value: 'services.travel_agency' },
+            { label: 'Police', value: 'service.police' },
+            { label: 'Fire Station', value: 'service.fire_station' },
+            { label: 'Taxi', value: 'service.taxi' },
+            { label: 'Finance', value: 'service.financial' },
+            { label: 'Travel Agency', value: 'service.travel_agency' },
         ],
     },
 ];

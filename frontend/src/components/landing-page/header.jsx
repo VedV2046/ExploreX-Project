@@ -6,7 +6,7 @@ function Header({ onHome, onDiscover }) {
         <div className="header">
             <div className="brand">
                 <img className="logo" src={logo} alt="exploreX logo"></img>
-                <h1>ExploreX</h1>
+                <a href="/" style={{textDecoration: "none", color: "#D0BCFF"}}><h1>ExploreX</h1></a>
             </div>
             <div className="links">
                 <button type="button" className="link-button" onClick={onHome}>Home</button>

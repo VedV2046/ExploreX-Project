@@ -23,7 +23,7 @@ function Landing({
           rotateOnHover
           hue={0}
           forceHoverState={false}
-          backgroundColor=""none
+          backgroundColor="none"
         />
       </div>
       <div className="landing-page-content">
