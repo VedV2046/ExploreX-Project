@@ -29,66 +29,129 @@
 }
 
 .spot-card {
-    background-color: #16161A;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 16px;
-    padding: 20px;
-    transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    background-color: #0f1724;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 14px;
+    padding: 18px;
+    transition: transform 250ms ease, box-shadow 250ms ease, border-color 250ms ease;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    min-height: 260px; /* equal height cards */
+    text-decoration: none;
+    color: inherit;
+    transform-origin: center;
 }
 
-.spot-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(139, 92, 246, 0.4);
-    box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.15);
+.spot-card:hover, .spot-card:focus {
+    transform: translateY(-6px) scale(1.12);
+    border: 1px solid rgba(139, 92, 246, 0.35);
+    border-color: rgba(139, 92, 246, 0.35);
+    box-shadow: 100px 18px 40px -12px rgba(0,0,0,0.6), 100px 15px 240px rgba(139,92,246,0.08);
+
+    .spot-badge{
+        border: 1px solid rgb(47, 0, 255);
+    }
 }
 
 .spot-badge {
-    align-self: flex-start;
-    background-color: rgba(139, 92, 246, 0.15);
-    color: #A78BFA;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    height: 24px;
+    background-color: rgb(47, 33, 80);
+    color: #EDE9FE;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 16px;
     font-weight: 600;
-    margin-bottom: 12px;
-    text-transform: uppercase;
 }
 
 .spot-title {
-    font-size: 20px;
+    font-size: 24px;
     font-weight: 700;
     margin: 0 0 8px 0;
     color: #FFFFFF;
 }
 
-.spot-description {
-    font-size: 14px;
-    color: #9CA3AF;
-    line-height: 1.5;
-    margin-bottom: 16px;
+.spot-card-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.spot-address {
+    font-size: 16px;
+    color: #CBD5E1;
+    line-height: 1.4;
+    margin-bottom: 12px;
+}
+
+.spot-card-body {
+    margin: 10px 0 12px 0;
     flex-grow: 1;
 }
 
-.spot-footer {
+
+.spot-card-bottom {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     padding-top: 12px;
-    border-top: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 1px solid rgba(255,255,255,0.03);
     font-size: 13px;
     color: #D1D5DB;
 }
 
-.spot-rating {
+.spot-actions {
+    display: flex;
+    width: 100%;
+    height: 50px;
+    justify-content: center;
+    gap: 8px;
+    align-items: center;
+}
+
+.maps-btn, .maps-button {
     display: flex;
     align-items: center;
-    gap: 4px;
-    color: #FBBF24;
+    justify-content: center;
+    width: 100%;
+    height: 25px;
+    gap: 8px;
+    background: none;
+    color: white;
+    padding: 8px 12px;
+    border: 1px solid #929091;
+    border-radius: 80px;
+    font-size: 16px;
+    text-decoration: none;
     font-weight: 600;
+    box-shadow: 0 6px 18px rgba(79,70,229,0.18);
+    transition: transform 140ms ease;
 }
+
+.maps-btn:hover, .maps-button:hover {
+    transform: translateY(-2px); 
+    background-color: #A078FF;
+}
+
+.maps-icon { font-size: 16px; }
+
+.copy-btn {
+    background: transparent;
+    color: #CBD5E1;
+    border: 1px solid rgba(255,255,255,0.04);
+    padding: 6px 10px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Make anchor cards remove default link styles */
+.spot-card-link { display: flex; flex-direction: column; }
 
 .loading-state, .error-state, .empty-state {
     text-align: center;
@@ -108,4 +171,22 @@
     color: white;
     font-weight: 600;
     cursor: pointer;
+}
+
+/* Responsive columns */
+@media (min-width: 1200px) {
+    .spots-grid { grid-template-columns: repeat(4, 1fr); }
+}
+
+@media (min-width: 900px) and (max-width: 1199px) {
+    .spots-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (min-width: 600px) and (max-width: 899px) {
+    .spots-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 599px) {
+    .spots-grid { grid-template-columns: 1fr; padding: 0; }
+    .travel-spots-section { padding: 16px; }
 }

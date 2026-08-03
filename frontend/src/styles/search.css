@@ -1,7 +1,7 @@
 .search{
     height: auto;
     margin-bottom: 100px;
-    color: #E9DDFF;
+    color: #fafafa;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -24,15 +24,18 @@
     padding: 0 120px 0 20px;
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 27px;
-    background-color: #16161a;
+    background-color: #16161a59;
     color: #ffffff;
-    font-size: 16px;
+    font-size: 20px;
     outline: none;
     box-sizing: border-box;
 }
 
 .search-input::placeholder {
-    color: #8E8D9A;
+    color: #efeff1;
+}
+.search-input:hover {
+    border: 1px solid rgb(184, 180, 180);
 }
 
 .search-button {

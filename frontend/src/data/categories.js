@@ -2,7 +2,7 @@ export const CATEGORY_DATA = [
     {
         id: 'tourism',
         label: 'Tourism',
-        icon: '🎡',
+        icon: '🗺️',
         items: [
             { label: 'Tourist Attractions', value: 'tourism.attraction' },
             { label: 'Museums', value: 'entertainment.museum' },
@@ -12,7 +12,7 @@ export const CATEGORY_DATA = [
     {
         id: 'food',
         label: 'Food & Dining',
-        icon: '🍽',
+        icon: '🍴',
         items: [
             { label: 'Restaurants', value: 'catering.restaurant' },
             { label: 'Cafes', value: 'catering.cafe' },
@@ -22,27 +22,80 @@ export const CATEGORY_DATA = [
     {
         id: 'healthcare',
         label: 'Healthcare',
-        icon: '🏥',
+        icon: '🩺',
         items: [
             { label: 'Hospitals', value: 'healthcare.hospital' },
-            { label: 'Pharmacies', value: 'healthcare.pharmacy' },
+            { label: 'Clinic', value: 'healthcare.clinic_or_praxis' },
+            {label: 'Dentist', value: 'healthcare.dentist' },
+            {label: 'Pharmacies', value: 'healthcare.pharmacy' },
         ],
     },
     {
         id: 'transport',
         label: 'Transport',
-        icon: '🚌',
+        icon: '🚍',
         items: [
             { label: 'Bus Stops', value: 'public_transport.bus' },
-            { label: 'Parking', value: 'service.vehicle.parking' },
+            { label: 'Metro/Subway', value: 'railway.subway' },
+            {label: 'Rental Car', value: 'rental.car' },
+            {label: 'Rental Bike', value: 'rental.bike' },
+            {label: 'Rental Boat', value: 'rental.boat' },
         ],
     },
     {
         id: 'nature',
         label: 'Nature & Outdoors',
-        icon: '🌳',
+        icon: '🌲',
         items: [
             { label: 'Parks', value: 'leisure.park' },
+            { label: 'Beaches', value: 'beach' },
+            { label: 'Mountains', value: 'natural.mountain' }
+        ],
+    },
+    {
+        id: 'Commercial',
+        label: 'Commercial',
+        icon: '🏪',
+        items: [
+            { label: 'SuperMarket', value: 'commercial.supermarket' },
+            { label: 'Library', value: 'education.library' },
+            { label: 'Stationery', value: 'commercial.stationery' },
+        ],
+    },
+    {
+        id: 'Accommodation',
+        label: 'Accommodation',
+        icon: '🏨',
+        items: [
+            { label: 'Hotel', value: 'accommodation.hotel' },
+            { label: 'Beach Resort', value: 'beach.beach_resort' },
+            { label: 'Hostel', value: 'accommodation.hostel' },
+        ],
+    },
+    {
+        id: 'Entertainment',
+        label: 'Entertainment',
+        icon: '🎭',
+        items: [
+            { label: 'Culture', value: 'entertainment.culture' },
+            { label: 'Cinema', value: 'entertainment.cinema' },
+            { label: 'Water Park', value: 'entertainment.water_park' },
+            { label: 'Theme Park', value: 'entertainment.theme_park' },
+            { label: 'Aquarium', value: 'entertainment.aquarium' },
+            { label: 'Planetarium', value: 'entertainment.planetarium' },
+            { label: 'Bowling', value: 'entertainment.bowling_alley' },
+        ],
+    },
+    {
+        id: 'Services',
+        label: 'Services',
+        icon: '🛎️',
+        items: [
+            { label: 'Police', value: 'services.police' },
+            { label: 'Fire Station', value: 'services.fire_station' },
+            { label: 'Taxi', value: 'services.taxi' },
+            { label: 'Finance', value: 'services.financial' },
+            { label: 'Travel Agency', value: 'services.travel_agency' },
         ],
     },
 ];

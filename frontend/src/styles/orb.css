@@ -1,0 +1,35 @@
+.landing-page-shell {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.landing-orb-shell {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.orb-container {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+}
+
+.landing-page-content {
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .landing-orb-shell {
+        background: radial-gradient(circle at top, rgba(139, 92, 246, 0.2), rgba(10, 10, 11, 0.98) 72%);
+    }
+}
+

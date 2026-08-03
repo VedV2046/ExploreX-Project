@@ -1,18 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getPlaces } from '../../services/api';
 import '../../styles/travel-spots.css';
-
-const categoryLabelMap = {
-    'catering.restaurant': 'Restaurants',
-    'healthcare.hospital': 'Hospitals',
-    'catering.cafe': 'Cafes',
-    'healthcare.pharmacy': 'Medicals',
-    'public_transport.bus': 'Bus Stops',
-    'leisure.park': 'Parks',
-    'entertainment.cinema': "Cinemas",
-};
-
-const getCategoryLabel = (category) => categoryLabelMap[category] || category || 'Places';
+import { getCategoryLabel } from '../../utils/category';
 
 function Places({ city, category }) {
     const [places, setPlaces] = useState([]);
@@ -61,7 +50,7 @@ function Places({ city, category }) {
 
       {loading && (
         <div className="loading-state">
-          <p>Fetching live places from backend...</p>
+          <p>Fetching places...</p>
         </div>
       )}
 
@@ -86,18 +75,60 @@ function Places({ city, category }) {
         <div className="spots-grid">
           {places.map((place, index) => {
             const placeObj = typeof place === 'string' ? { name: place } : place;
-            const cardCategory = placeObj.place_type || placeObj.category || headingCategory;
+            const placeType = placeObj.place_type || placeObj.category || null;
+            const readableCategory = getCategoryLabel(placeType || category || headingCategory);
+
+            const lat = placeObj.lat ?? placeObj.latitude ?? placeObj.latlng?.lat;
+            const lon = placeObj.lon ?? placeObj.longitude ?? placeObj.latlng?.lon;
+            const hasCoords = typeof lat === 'number' || typeof lon === 'number' || (lat && lon);
+
+            // Step 7: create Google Maps URL using backend coordinates
+            const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${placeObj.lat},${placeObj.lon}`;
+
+            const copyCoords = async (e) => {
+              e.stopPropagation();
+              e.preventDefault && e.preventDefault();
+              if (!hasCoords) return;
+              const text = `${lat}, ${lon}`;
+              try {
+                await navigator.clipboard.writeText(text);
+              } catch (err) {
+                // fallback: create temporary input
+                const input = document.createElement('input');
+                input.value = text;
+                document.body.appendChild(input);
+                input.select();
+                document.execCommand('copy');
+                document.body.removeChild(input);
+              }
+            };
 
             return (
-              <div key={index} className="spot-card">
-                <span className="spot-badge">{cardCategory || 'Place'}</span>
-                <h3 className="spot-title">{placeObj.name || placeObj.title || 'Popular Place'}</h3>
-                <p className="spot-description">
-                  {placeObj.description || placeObj.details || `Discover useful places in ${headingCity}.`}
-                </p>
-                <div className="spot-footer">
-                  <span className="spot-rating">★ {placeObj.rating || '4.8'}</span>
-                  <span>{placeObj.location || headingCity}</span>
+              <div
+                key={index}
+                className="spot-card"
+              >
+                <div className="spot-card-top">
+                  <div className="spot-badge">{readableCategory}</div>
+                </div>
+
+                <div className="spot-card-body">
+                  <h3 className="spot-title">{placeObj.name || placeObj.title}</h3>
+                  {placeObj.address && <div className="spot-address">{placeObj.address}</div>}
+                </div>
+
+                <div className="spot-card-bottom">
+                  <div className="spot-actions">
+                      <a
+                        href={mapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="maps-button"
+                        onClick={(e) => e.stopPropagation()}
+                      >
+                        Open in Google Maps
+                      </a>                  
+                  </div>
                 </div>
               </div>
             );

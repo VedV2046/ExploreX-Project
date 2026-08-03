@@ -20,11 +20,15 @@ const selectStyles = {
         ...base,
         backgroundColor: '#313031',
         zIndex: 20,
+        overflow: 'visible',
+        maxHeight: 'none',
     }),
     menuList: (base) => ({
         ...base,
         backgroundColor: '#313031',
         padding: 0,
+        maxHeight: 'none',
+        overflowY: 'visible',
     }),
     option: (base, state) => ({
         ...base,
@@ -125,10 +129,7 @@ function Hero({
             </div>
 
             <div className="hero-formGrid">
-                <div className="hero-field">
-                    <label htmlFor="category" className="hero-label">
-                        Category
-                    </label>
+                <div className="hero-field">                    
                     <Select
                         inputId="category"
                         instanceId="category-select"
@@ -146,9 +147,6 @@ function Hero({
                 </div>
 
                 <div className="hero-field">
-                    <label htmlFor="subcategory" className="hero-label">
-                        Subcategory
-                    </label>
                     <Select
                         inputId="subcategory"
                         instanceId="subcategory-select"

@@ -22,7 +22,7 @@ function Search({ onSearch, currentCity }) {
           <input 
             className="search-input" 
             type="search" 
-              placeholder="Search destination (e.g. Delhi, Goa, Jaipur)..." 
+              placeholder="Search any city or area..." 
             value={inputVal}
             onChange={(e) => setInputVal(e.target.value)}
           />
