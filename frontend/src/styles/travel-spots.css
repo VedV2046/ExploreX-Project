@@ -140,17 +140,26 @@
     background: linear-gradient(90deg, rgb(53, 30, 255) 0%, rgb(1, 18, 114) 100%);
     border: 1px solid rgb(0, 16, 70);
 }
+.translate-button{
+    height: 40px;
+    width: 20%;
+    background: none;
+    color: rgb(196, 194, 194);
+    padding: 8px 12px;
+    border: 1px solid #929091;
+    border-radius: 80px;
+    font-size: 18px;
+    font-weight: 600;
+    transition: transform 140ms ease;
+}
+.translate-button:hover{
+    transform: scale(1.08); 
+    background: linear-gradient(90deg, rgb(53, 30, 255) 0%, rgb(1, 18, 114) 100%);
+    border: 1px solid rgb(0, 16, 70);
+}
 
 .maps-icon { font-size: 16px; }
 
-.copy-btn {
-    background: transparent;
-    color: #CBD5E1;
-    border: 1px solid rgba(255,255,255,0.04);
-    padding: 6px 10px;
-    border-radius: 8px;
-    cursor: pointer;
-}
 
 /* Make anchor cards remove default link styles */
 .spot-card-link { display: flex; flex-direction: column; }
