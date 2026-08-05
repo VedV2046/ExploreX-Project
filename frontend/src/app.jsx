@@ -51,9 +51,10 @@ function App() {
     window.history.pushState({ page: 'discover' }, '', window.location.href)
   }
 
-  return (
-    <div>
-      {page === 'discover' ? (
+    return (
+      <div className="app-shell">
+        <main className="app-main">
+          {page === 'discover' ? (
         <Discover
           city={searchCity}
           category={selectedSubcategory}
@@ -71,8 +72,9 @@ function App() {
           onSubcategoryChange={handleSubcategoryChange}
         />
       )}
-      <Footer />
-    </div>
+        </main>
+        <Footer />
+      </div>
   )
 }
 

@@ -42,10 +42,8 @@ function Places({ city, category }) {
 
   return (
     <div className="travel-spots-section">
-      <div className="spots-header">
-        <h2>
-          {headingCategory} in <span>{headingCity}</span>
-        </h2>
+      <div className="spots-header">       
+          <h2>Popular {headingCategory} in <span>{headingCity}</span></h2>
       </div>
 
       {loading && (
@@ -113,7 +111,16 @@ function Places({ city, category }) {
                 </div>
 
                 <div className="spot-card-body">
-                  <h3 className="spot-title">{placeObj.name || placeObj.title}</h3>
+                  <h3 className="spot-title">
+                    {placeObj.original_name || placeObj.name || placeObj.title}
+                  </h3>
+
+                  {placeObj.original_name && placeObj.name && placeObj.original_name !== placeObj.name && (
+                    <p className="spot-subtitle">
+                      {placeObj.name}
+                    </p>
+                  )}
+
                   {placeObj.address && <div className="spot-address">{placeObj.address}</div>}
                 </div>
 
