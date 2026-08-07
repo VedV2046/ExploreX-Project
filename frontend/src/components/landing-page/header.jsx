@@ -11,7 +11,6 @@ function Header({ onHome, onDiscover }) {
             <div className="links">
                 <button type="button" className="link-button" onClick={onHome}>Home</button>
                 <button type="button" className="link-button" onClick={onDiscover}>Recent</button>
-                <button type="button" className="link-button" onClick={onHome}>Favourites</button>
             </div>
         </div>
     );
